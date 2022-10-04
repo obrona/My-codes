@@ -21,3 +21,29 @@ function coins(xs,n) {
         
     }
 }
+
+Faster algorithm returns just 1 result, using the largest coin the most
+input must be a list of distinct coins sorted in descending order
+
+
+function fgh(xs,x,n) {
+    const yes = fast_coins(tail(xs),n-head(xs)*x);
+    return x === 0 ? null : is_null(yes) ? fgh(xs,x-1,n) : is_null(head(yes))? pair(x,null) 
+    : pair(x,yes);
+}
+          
+    
+function fast_coins(xs,n) {
+    if (is_null(xs)) { return n===0 ? list(null) :null;}
+    else { const a = math_floor(n/head(xs));
+    const result = fgh(xs,a,n); 
+     if (is_null(result)) { const taa = fast_coins(tail(xs),n);
+         return is_null(taa) ? null : is_null(head(taa)) ? pair(0,null) : pair(0,taa);}
+     else { return result;}}}
+     
+
+
+
+
+
+
