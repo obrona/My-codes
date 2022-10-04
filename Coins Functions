@@ -1,0 +1,23 @@
+INPUT : list of distinct types of coins, sum desired
+OUTPUT : number of coins of each type needed to create desired sum
+EG coins(list(3,5),8); returns list(list(1,1))
+coins(list(1,2),0) returns list(0,0) 
+coins(list(3,4),-1) returns null  
+
+
+
+
+
+
+
+function coins(xs,n) {
+    if(n===0) { return list(build_list(x=>0,length(xs)));}
+    else if (is_null(xs)) { return n===0 ? list(null) : null;}
+    else { const a = math_floor(n/head(xs));
+    const with_head = filter(x=>!is_null(x),
+     accumulate((x,y)=>append(x,y),null,(map(x=>map(y=>pair(x,y),coins(tail(xs),n-x*head(xs))),enum_list(1,a)))));
+    const no_head = map(x=>pair(0,x),coins(tail(xs),n));
+  return append(with_head,no_head);
+        
+    }
+}
