@@ -1,0 +1,185 @@
+function repeat(f,n) {
+    return n===0 ? x=>x : x=>f(repeat(f,n-1)(x));
+}
+
+
+function bubblesort_array(A) {
+ const len = length(A);
+ for (let i = len - 1; i >= 1; i = i - 1) {
+ for (let j = 0; j < i; j = j + 1) {
+ if (list_ref(A,j) > list_ref(A,j+1)) {
+ const temp = list_ref(A,j);
+ const k = repeat(tail,j)(A);
+ set_head(k,list_ref(A,j+1));
+ set_head(tail(k),temp);
+ }
+ }
+ }
+}
+
+const LL = list(3, 5, 2, 4, 1);
+bubblesort_array(LL);
+LL; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+const mem = [];
+
+function read(n, k) {
+    return mem[n] === undefined
+           ? undefined
+           : mem[n][k];
+}
+
+function write(n, k, value) {
+    display("write");
+    if (mem[n] === undefined) {
+        mem[n] = [];
+    }
+    mem[n][k] = value;
+}
+
+function first_denomination(kinds_of_coins) {
+    return kinds_of_coins === 1 ?   5 :
+           kinds_of_coins === 2 ?  10 :
+           kinds_of_coins === 3 ?  20 :
+           kinds_of_coins === 4 ?  50 :
+           kinds_of_coins === 5 ? 100 : 0;
+}
+
+// The non-memoized version.
+function cc(amount, kinds_of_coins) {
+    return amount === 0
+           ? 1
+           : amount < 0 || kinds_of_coins === 0
+           ? 0
+           : cc(amount, kinds_of_coins - 1)
+             +
+             cc(amount - first_denomination(kinds_of_coins),
+                kinds_of_coins);
+}
+
+// The memoized version.
+// n is the amount in cents, and k is the number of denominations.
+function mcc(n, k) { 
+    display(mem);
+    if (n>=0&&k>=0&&read(n,k)!== undefined) { return read(n,k);}
+    else {// display(mem);
+        const result = n === 0 ? 1
+                                  : n<0||k===0
+                                  ? 0
+                                  : mcc(n-first_denomination(k),k)
+                                  + mcc(n,k-1);
+                                  
+              if(n>=0 && k >=0) {      write(n,k,result);}
+                     
+                     return result;}
+        
+    
+    // Your solution here.
+    
+}
+
+
+function mchoose(n, k) {
+display(mem);
+if (read(n, k) !== undefined) {
+return read(n, k);
+} else {
+const result = k > n ? 0
+: k === 0 || k === n ? 1
+: mchoose(n - 1, k) + 
+mchoose(n - 1, k - 1);
+write(n, k, result);
+return result;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//mcc(365,5);
+
+//mchoose(10, 5);  // Expected result: 1730 
+
+function swap2(A, i, j) {
+ let temp = A[i][j];
+ A[i][j] = A[j][i];
+ A[j][i] = temp;
+}
+
+function swap(A, i, j) {
+ let temp = A[i];
+ A[i] = A[j];
+ A[j] = temp;
+}
+
+
+function reverse_array(A) {
+ const len = array_length(A);
+ const half_len = math_floor(len / 2);
+ let i = 0;
+ while (i < half_len) {
+ const j = len - 1 - i;
+ swap(A, i, j);
+ i = i + 1;
+ }
+
+  return A;
+  
+    
+}
+
+
+
+function transpose(M) {
+    //let result = [];
+    const row = array_length(M);
+    const cols = array_length(M[0]);
+    for (let x = 0;x<cols;x=x+1) {
+       
+       for(let y = x;y<row;y=y+1) {
+           swap2(M,x,y);
+       }
+    }
+
+    return M;
+    
+}
+
+function rotate(M) {
+    return transpose(reverse_array(M));
+    
+}
+
+const matrix = [[ 1, 2, 3, 4],
+[ 5, 6, 7, 8],
+[ 9, 10, 11, 12],
+[13, 14, 15, 16]];
+
+
+
+rotate(matrix);
