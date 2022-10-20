@@ -1,0 +1,52 @@
+function add_streams(s1, s2) {
+if (is_null(s1)) {
+return s2;
+} else if (is_null(s2)) {
+return s1;
+} else {
+return pair(head(s1) + head(s2),
+() => add_streams(stream_tail(s1),
+stream_tail(s2)));
+}
+}
+function integers_from(x) {
+    return pair(x,()=>integers_from(x+1));
+}
+
+function stream_of_x(x) {
+    return pair(x,()=>stream_of_x(x));
+}
+
+function partial_sums(s) {
+    
+    return is_null(s) ? null 
+     :pair(head(s),()=>add_streams(stream_of_x(head(s)),partial_sums(stream_tail(s))));
+}
+
+const xx = pair(1,()=>pair(2,()=>pair(3,()=>null)));
+     
+
+let s = undefined;
+
+function zip_list_of_streams(xs) {
+    if(s===undefined) {
+        s = xs;
+        return pair(head(head(xs)),()=>zip_list_of_streams(tail(xs)));
+    }
+    
+    else if (is_null(xs)) { return zip_list_of_streams(s);}
+    
+    else { return pair(head(head(xs)),()=>zip_list_of_streams(tail(xs)));}
+        
+    
+}
+
+
+const ones = stream_of_x(1);
+const twos = stream_of_x(2);
+const threes = stream_of_x(3);
+
+eval_stream(partial_sums(stream_of_x(3)),10);
+
+
+
