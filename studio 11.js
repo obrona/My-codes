@@ -17,10 +17,9 @@ function stream_combine(f, s1, s2) {
 
 }
 
-function stream_of(x) {
-    return stream_map(s=>s*x,ones);
+function integers1(x) {
+    return pair(x,()=>integers1(x+1));
 }
-
 
 
 
@@ -29,10 +28,58 @@ function stream_of(x) {
 
 
 function stream_to_series(s) {
+    function stream_of(x) {
+    return stream_map(s=>s*x,ones);
+}
+
+    
     return x=>pair(head(s),()=>mul_streams(stream_of(x),stream_to_series(stream_tail(s))(x)));
 }
 
 const ss = stream_to_series(integers);
 const yy = stream_to_series(ones);
+eval_stream(integers1(1),10);
+//eval_stream(yy(3),10);
+//eval_stream(A,10);
+//eval_stream(B,10);
 
-eval_stream(yy(3),10);
+function stream_pairs(s) {
+return is_null(s)
+? null
+: stream_append(
+stream_map(
+sn => pair(head(s), sn),
+stream_tail(s)),
+stream_pairs(stream_tail(s)));
+}
+
+function stream_append_pickle(xs, ys) {
+return is_null(xs)
+? ys()
+: pair(head(xs),
+() => stream_append_pickle(stream_tail(xs),
+ys));
+}
+function stream_pairs2(s) {
+return is_null(s)
+? null
+: stream_append_pickle(
+stream_map(
+sn => pair(head(s), sn),
+stream_tail(s)),
+() => stream_pairs2(stream_tail(s))); }
+
+const s2 = stream_pairs2(integers);
+
+function zip(s1,s2) {
+    return pair(head(s1),()=>pair(head(s2()),()=>zip(stream_tail(s1),()=>stream_tail(s2()))));
+}
+
+function countable_pairs(s) {
+    return zip(stream_map(x=>pair(head(s),x),stream_tail(s)),()=>countable_pairs(stream_tail(s)));
+}
+
+
+const hhh = countable_pairs(integers);
+eval_stream(hhh,100);
+  
