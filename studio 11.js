@@ -80,6 +80,30 @@ function countable_pairs(s) {
 }
 
 
+function tier_checker(n,x) {
+    
+    if((n-math_pow(2,x)+1)%math_pow(2,x+1)===0) {
+        return pair(x+1,x+2+(n-math_pow(2,x)+1)/math_pow(2,x+1));}
+        
+       
+        
+    
+  else { 
+         return tier_checker(n,x+1);}
+    
+
+
+}
+
+
+
+
+
+
+
+
 const hhh = countable_pairs(integers);
-eval_stream(hhh,100);
-  
+//eval_stream(hhh,100);
+//eval_stream(hhh,200);
+//stream_ref(hhh,139); 
+ tier_checker(35,0);
