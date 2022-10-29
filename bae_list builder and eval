@@ -101,8 +101,8 @@ function build_bae_list(xs) {
     }
 }
 
-
+const y = list("(","(","(",1,"+",2,")","*","(",1,"+",3,")",")","+",4,")");
 const x = list("(","(",2,"*","(",5,"+",1,")",")","+","(","(",100,"+",1,")","*",2,")",")");
-display_list(build_bae_list(x));
+display_list(build_bae_list(y));
 
     
