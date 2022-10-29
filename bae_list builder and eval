@@ -1,0 +1,108 @@
+function take(lst,n) {
+    return n===0?null:pair(head(lst),take(tail(lst),n-1));
+}
+
+function drop(lst,n) {
+    return n===0?lst:tail(drop(lst,n-1));
+}
+
+function interval(lst,x,y) {
+    if (x===y) { return list(list_ref(lst,x));}
+    else {
+    
+    return take(drop(lst,x),y-x+1);}
+}
+
+const a = enum_list(1,10);
+a;
+interval(a,0,5);
+
+function is_operator(x) {
+    if(x===`+`||x===`-`||x===`*`||x===`/`) { return true;}
+    else { return false;}
+}
+
+function is_right_bracket(x) {
+    if(x===`(`) { return true;}
+    else { return false; }
+}
+
+function is_left_bracket(x) {
+    if(x===`)`) { return true;}
+    else { return false;}
+}
+
+function string_to_function(x) {
+    if(x===`+`) { return (x,y)=>x+y;}
+    else if (x===`-`) { return (x,y)=>x-y;}
+    else if (x===`*`) { return (x,y)=>x*y;}
+    else { return (x,y)=>x/y;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function find_operator(xs) {
+  //let pos = 0;
+  let count = 0;
+  const len = length(xs);
+  for(let i=1;i<len-1;i=i+1) {
+      if(count===0) {
+          const symbol = list_ref(xs,i);
+          if(is_operator(symbol)) { 
+              return i;
+              break;}
+               
+          else if (is_right_bracket(symbol)) { 
+              count = count +1;
+              
+          
+      }
+  }
+    else {
+        const symbol = list_ref(xs,i);
+        if(is_left_bracket(symbol)) { 
+            count = count-1;
+            
+        }
+        else if (is_right_bracket(symbol)) {
+            count = count+1;
+            
+        }
+    }
+  }
+
+    
+}
+
+const bae_list = list("(", "(", 2, "+", 5, ")", "*", 100, ")");
+
+
+function build_bae_list(xs) {
+    if(is_number(head(xs))) { return head(xs);}
+    else {
+        const len = length(xs);
+        const place = find_operator(xs);
+        const first_operand = build_bae_list(interval(xs,1,place-1));
+        const second_operand = build_bae_list(interval(xs,place+1,len-2));
+        return list(first_operand,list_ref(xs,place),second_operand);
+    }
+}
+
+
+const x = list("(","(",2,"*","(",5,"+",1,")",")","+","(","(",100,"+",1,")","*",2,")",")");
+display_list(build_bae_list(x));
+
+    
