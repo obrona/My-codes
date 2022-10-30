@@ -32,13 +32,6 @@ function is_left_bracket(x) {
     else { return false;}
 }
 
-function string_to_function(x) {
-    if(x===`+`) { return (x,y)=>x+y;}
-    else if (x===`-`) { return (x,y)=>x-y;}
-    else if (x===`*`) { return (x,y)=>x*y;}
-    else { return (x,y)=>x/y;}
-}
-
 
 
 
@@ -103,6 +96,38 @@ function build_bae_list(xs) {
 
 const y = list("(","(","(",1,"+",2,")","*","(",1,"+",3,")",")","+",4,")");
 const x = list("(","(",2,"*","(",5,"+",1,")",")","+","(","(",100,"+",1,")","*",2,")",")");
-display_list(build_bae_list(y));
+display_list(build_bae_list(x));
 
+  
+ function string_to_function(x) {
+     if(x===`+`) { return (x,y)=>x+y;}
+     else if (x===`-`) { return (x,y)=>x-y;}
+     else if (x===`*`) { return (x,y)=>x*y;}
+     else { return (x,y)=>x/y;}
+     
+ }
+  
+ function eval_bae_tree(xs) {
+     if(is_number(xs)) { return xs;}
+     else {
+         const first = eval_bae_tree(head(xs));
+         const second = eval_bae_tree(list_ref(xs,2));
+         return string_to_function(list_ref(xs,1))(first,second);
+     }
+ }
+  
+const bae_tree = list( list(2, "+", 5), "*", 100 );
+
+eval_bae_tree(build_bae_list(x));  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     
