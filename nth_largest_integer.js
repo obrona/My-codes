@@ -69,7 +69,7 @@ function build_2nd_largest_int(a) {
     } 
 }
 
-build_2nd_largest_int([2,2,2,5,3]);
+
 
 
 //all digits are distinct
@@ -95,14 +95,150 @@ function d_r(x) {
     const k = factorial(largest_fact(x));
     for(let i=0;true;i=i+1) {
         if((x-i*k)<0) {
-            return [i-1,largest_fact(x),x-(i-1)*k];
+            return [[i-1,largest_fact(x)],x-(i-1)*k];
             break;
             
         }
     }
 }
 
-d_r(12);
+function fact_sum(x,k) {
+    const  largest = largest_fact(x);
+    let m = [];
+    let remainder = x;
+    
+    for(let i=k;i>=1;i=i-1) {
+        let count = 0;
+        while((remainder-count*factorial(i))>=0) {
+            count = count +1;
+        }
+       m[k-i]=[count-1,i];
+       remainder = remainder-(count-1)*factorial(i);
+        
+        
+        
+        
+        
+    }
+   return m; }
+    
+    
+fact_sum(360,6);
+    
+    
+function index(arr) {
+    const len = array_length(arr);
+    for(let i=len-1;i>=0;i=i-1) {
+        if (arr[i][0]!==0) {
+            return i;
+            break;
+        }
+        
+        
+    }
+   return 0;
+    
+}   
+    
+    
+ 
+fact_sum(363,6);
+
+
+
+
+
+
+
+
+
+function remove(arr,x) {
+    const b = [];
+    
+    const len = array_length(arr);
+    for(let i=0;i<len;i=i+1) {
+        if(i<x) {
+            b[i]=arr[i];
+        }
+      else if (i>x) {
+          b[i-1]=arr[i];
+      }
+        
+    }
+   return b;
+    
+    }
+    
+    
+   
+function build_nth_largest(digits,n) {
+    
+    const fact_map = fact_sum(n,array_length(digits)-1);
+    const len = array_length(fact_map);
+    let b = reverse_array(insertion_sort(digits));
+    let m = [];
+    
+    const idex = index(fact_map);
+    
+    
+    if(idex===len-1) {
+        for(let i=0;i<=len-2;i=i+1) {
+           const x=fact_map[i];
+           //display(x);
+           m[array_length(m)]=b[x[0]];
+           //display(m);
+           b = reverse_array(insertion_sort(remove(b,x[0])));
+           //display(b); 
+            
+            
+        }
+        const r = array_length(b);
+        display(b);
+        for(let i=0;i<r;i=i+1) {
+            m[array_length(m)]=b[i];
+           display(b);
+        }
+       
+       return m;
+    
+    
+    
+} 
+
+  else {
+      for(let i=0;i<idex;i=i+1) {
+          const x = fact_map[i];
+          m[array_length(m)]=b[x[0]];
+          b = reverse_array(insertion_sort(remove(b,x[0])));
+      }
+      const z = fact_map[idex];
+      m[array_length(m)]=b[z[0]-1];
+      b = insertion_sort(remove(b,z[0]-1));
+      const lennn = array_length(b);
+      for(let i=0;i<lennn;i=i+1) {
+          m[array_length(m)]=b[i];
+      }
+      
+      
+  }
+    
+    return m; 
+}
+    
+build_nth_largest([1,2,3,4],4);
+//fact_sum(3,3);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
