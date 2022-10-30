@@ -179,6 +179,16 @@ function build_nth_largest(digits,n) {
     let m = [];
     
     const idex = index(fact_map);
+    if (n>=factorial(array_length(digits))) {
+        return insertion_sort(digits);
+    }
+    
+    
+   else { 
+    
+    
+    
+    
     
     
     if(idex===len-1) {
@@ -224,8 +234,8 @@ function build_nth_largest(digits,n) {
     
     return m; 
 }
-    
-build_nth_largest([1,2,3,4],4);
+}
+build_nth_largest([1,2,3,4,5,6],720);
 //fact_sum(3,3);
 
 
