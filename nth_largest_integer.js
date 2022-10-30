@@ -206,7 +206,7 @@ function build_nth_largest(digits,n) {
         display(b);
         for(let i=0;i<r;i=i+1) {
             m[array_length(m)]=b[i];
-           display(b);
+           //display(b);
         }
        
        return m;
@@ -235,7 +235,7 @@ function build_nth_largest(digits,n) {
     return m; 
 }
 }
-build_nth_largest([1,2,3,4,5,6],720);
+build_nth_largest([1,2,3,4],2);
 //fact_sum(3,3);
 
 
