@@ -53,4 +53,21 @@ function filter_tree(f,xs)  {
     
 display_list(filter_tree(x=>x%2===1,xs));
 
+function flatten(xs) {
+    if (is_null(xs)) {
+        return null;
+    }
+
+    else if (!is_pair(head(xs))) {
+        return pair(head(xs),flatten(tail(xs)));
+    }
+    
+    else {
+        return append(flatten(head(xs)),flatten(tail(xs)));
+    }
+    
+    
+}
+
+
   
