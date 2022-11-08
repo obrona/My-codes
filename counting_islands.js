@@ -133,14 +133,14 @@ function count_islands(arr){
 const emap = [[1,1,0,0,1,1],[1,1,1,1,1,1],[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,1,1,1,0],
 [0,0,0,0,0,0],[1,0,1,0,1,0]];
 
- 
+const ggg = [[0,0,1],[0,1,0],[1,1,1],[0,0,0],[1,0,1]];
 
  
  
 const b = linelets([1, 2, 0, 0, 1, 0, 0, 1]);
 const c = position_only(linelets([0, 0, 0, 0, 0, 3, 3, 0]));
 
-count_islands(emap);
+count_islands(ggg);
     
     
     
