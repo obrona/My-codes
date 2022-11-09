@@ -21,6 +21,7 @@ function insertion_sort(xs) {
            : insert(head(xs), insertion_sort(tail(xs)));
 }
 
+
 function map_tree(fun, tree) {
     return map(sub_tree =>
                    !is_list(sub_tree)
@@ -28,6 +29,20 @@ function map_tree(fun, tree) {
                    : map_tree(fun, sub_tree),
                tree);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function flatten(xs) {
@@ -151,13 +166,14 @@ function make_SToN(T) {
     //const tree = T;
     let s = map_tree(x=>"p",T);
     //display_list(s);
-    let numbers = order(T);
+    let numbers = insertion_sort(filter(x=>x!==null,flatten(T)));
     //display_list(numbers);
     const len = length(numbers);
     for(let i=0;i<len;i=i+1) {
         s = insert_tree(s,head(numbers));
+        //display_list(s);
         numbers = tail(numbers);
-        
+        //display_list(numbers);
         
     }
     
@@ -181,5 +197,16 @@ const d = map_tree(x=>"p",my_tree);
 //display_list(my_tree);              
 //display_list(make_SToN(my_tree));  
 
-const tree = list(list(15, 14, list(13, 12), 11), 10, null, list(9), 8, 7,
+const tree = list(list(15, 14, list(13, 12), 11), 10, null, list(list(9)), 8, 7,
 list( list( 6), 5, list( 4, 3, list( 2, 1))));
+
+//display_list(order(my_tree));
+display_list(make_SToN(my_tree));
+
+
+
+
+
+
+
+
