@@ -90,6 +90,38 @@ function find_null(xs,y,s) {
 }
 
 
+function order(xs) {
+    const s = flatten(xs);
+    //display_list(s);
+    let num = insertion_sort(filter(x=>x!==null,s));
+    let null_pos = reverse(find_null(s,0,null));
+    let result = null;
+    const len = length(s);
+    for(let i=0;i<len;i=i+1) {
+        if(is_null(null_pos)) {
+            result=pair(head(num),result);
+            num=tail(num);
+        }
+        
+        
+        
+        
+        
+        else if(i===head(null_pos)) {
+            result=pair(null,result);
+            null_pos=tail(null_pos);
+        }
+        else {
+           result=pair(head(num),result); 
+           num=tail(num); 
+        
+        }
+    
+    }
+    
+    return reverse(result);
+} 
+
 
 
 
@@ -119,7 +151,7 @@ function make_SToN(T) {
     //const tree = T;
     let s = map_tree(x=>"p",T);
     //display_list(s);
-    let numbers = insertion_sort(flatten(T));
+    let numbers = order(T);
     //display_list(numbers);
     const len = length(numbers);
     for(let i=0;i<len;i=i+1) {
@@ -139,7 +171,7 @@ function make_SToN(T) {
     // WRITE YOUR SOLUTION HERE.
 
 } 
-const my_tree = list( list(23, 18, list(20, 11), 25), 17, list(16), 14, 24, 15,
+const my_tree = list( list(23, 18, list(20, 11), 25), 17, list(16), 14, 24, null,
                       list( list(13), 21, list(22, 12, list(19, 15)) ) );  
                       
                       
@@ -150,8 +182,7 @@ const d = map_tree(x=>"p",my_tree);
 //display_list(make_SToN(my_tree));  
 
 
-const x = list(1,2,null,6,null,5);
-find_null(x,0,null);
+display_list(make_SToN(my_tree));
 
                       
 
