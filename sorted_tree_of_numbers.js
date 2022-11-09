@@ -201,7 +201,7 @@ const tree = list(list(15, 14, list(13, 12), 11), 10, null, list(list(9)), 8, 7,
 list( list( 6), 5, list( 4, 3, list( 2, 1))));
 
 //display_list(order(my_tree));
-display_list(make_SToN(my_tree));
+display_list(make_SToN(tree));
 
 
 
