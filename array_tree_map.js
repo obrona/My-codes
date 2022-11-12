@@ -1,61 +1,52 @@
-function tail_n_times(xs,n) {
-    return is_null(xs) ? xs 
-                       : n===0
-                       ? xs
-                       :tail(tail_n_times(xs,n-1));
+function append_array(x,y) {
+    const len = array_length(y);
+    for(let i=0;i<len;i=i+1) {
+        x[array_length(x)]=y[i];
+    }
+
+    return x;
 }
 
+append_array([1,2,3,4],[5,6,7,8]);
 
 
 
-function make_circular_copy(xs) {
-    const copt = map(x=>x,xs);
-    set_tail(tail_n_times(copt,length(xs)-1),copt);
-    return copt; 
-    
-    
-}
-
-
-const a =list(1,2,3,4,pair(1,2),3);
-const b = make_circular_copy(a);
-a;
-draw_data(b);
-
-
-
-
-function make_linear(xs) {
-    const temp = head(xs);
-    const check = pair(1,1);
-    set_head(xs,check);
-    //display_list(xs);
-    for(let i=0;i>-1;i=i+1) {
-        if(head(tail(xs))===check) {
-            set_head(tail(xs),temp);
-            set_tail(xs,null);
-            break;
+function map_array_tree(f,A) {
+    const result = [];
+    const len = array_length(A);
+    for(let i=0;i<len;i=i+1) {
+        if(is_array(A[i])) {
+            result[i]=map_array_tree(f,A[i]);
         }
-        else {
-            xs = tail(xs);
-        }   
-        
-        
-    } 
-        
-        
-       
+       else {
+           result[i]=f(A[i]);
+       } 
+    }
+
+    return result;
+}
+
+const a = [1,2,[3,4,[5,6,[]],[4,5]]];
+map_array_tree(x=>x*x,a);
+
+function flatten_array(A){
+    const result = [];
+    const len = array_length(A);
+    for(let i=0;i<len;i=i+1) {
+        if(is_array(A[i])) {
+            append_array(result,flatten_array(A[i]));
+        }
+       else {
+           result[array_length(result)]=A[i];
+       }
         
     }
-    
-    
-make_linear(b); 
-draw_data(b);
-equal(a,b);   
-    
+
+    return result;
+}
 
 
-
+flatten_array(a);
 
 
 
