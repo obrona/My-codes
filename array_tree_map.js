@@ -1,80 +1,67 @@
-function array_treemap(f,A) {
-    const len = array_length(A);
-    const result = [];
-    for(let i=0;i<len;i=i+1) {
-        if(is_array(A[i])) {
-            result[i]=array_treemap(f,A[i]);
+function tail_n_times(xs,n) {
+    return is_null(xs) ? xs 
+                       : n===0
+                       ? xs
+                       :tail(tail_n_times(xs,n-1));
+}
+
+
+
+
+function make_circular_copy(xs) {
+    const copt = map(x=>x,xs);
+    set_tail(tail_n_times(copt,length(xs)-1),copt);
+    return copt; 
+    
+    
+}
+
+
+const a =list(1,2,3,4,pair(1,2),3);
+const b = make_circular_copy(a);
+a;
+draw_data(b);
+
+
+
+
+function make_linear(xs) {
+    const temp = head(xs);
+    const check = pair(1,1);
+    set_head(xs,check);
+    //display_list(xs);
+    for(let i=0;i>-1;i=i+1) {
+        if(head(tail(xs))===check) {
+            set_head(tail(xs),temp);
+            set_tail(xs,null);
+            break;
         }
         else {
-            result[i]=f(A[i]);
-        }
+            xs = tail(xs);
+        }   
         
         
+    } 
         
         
-    }
-    
-    
-    return result;
-    
-    
-}
-
-const T = [2, 3, [1, [4, 5], []], 6, [7]];
-const S = array_treemap(x => x * 2, T);
-
-
-
-
-function append_array(xs,ys) {
-    const len = array_length(ys);
-    for(let i=0;i<len;i=i+1) {
-        xs[array_length(xs)] = ys[i];
-    }
-
-    
-}
-function flatten_array(A) {
-    const len = array_length(A);
-    const result = [];
-    for (let i=0;i<len;i=i+1) {
-        if(is_array(A[i])) {
-           append_array(result,flatten_array(A[i])); 
-            
-        }
-    
-        else {
-            result[array_length(result)]=A[i];
-        }
-        
-    }
-   return result;
-}
-    
-    
-function n_of_n_stream() {
-    function helper(x,n,y) {
-        if(n===0) {
-            return helper(x+1,y+1,y+1);
-        }
-       else {
-           return pair(x,()=>helper(x,n-1,y));
-       }
+       
         
     }
     
-    return helper(1,1,1);
     
+make_linear(b); 
+draw_data(b);
+equal(a,b);   
     
-    
-}
 
-    
-display_list(eval_stream(n_of_n_stream(),20));   
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     
     
     
