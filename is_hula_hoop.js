@@ -27,22 +27,30 @@ set_tail(head(hh3),hh3);
 
 
 function is_hula_hoop(xs) {
+
     const check = pair(1,1);
     function f(x) {
-     if (!is_pair(x)) {
+      if(head(x)===check)  {
+           return true;
+       }
+     
+     
+     
+       else if (!is_pair(x)) {
           return false;
       }
       
        else if (!(is_pair(head(x))&&is_pair(tail(x)))) {
            return false;
        }
-       else if(head(x)===check)  {
-           return true;
-       }
+       
        else {
            const temp = head(x);
+           //draw_data(temp);
            set_head(x,check);
-           return is_hula_hoop(temp) ? is_hula_hoop(tail(x)) : false;
+           //draw_data(temp);
+           //display(head(temp)===check);
+           return f(temp) ? f(tail(x)) : false;
            
            
            
@@ -51,10 +59,38 @@ function is_hula_hoop(xs) {
     
    return f(xs) ;
 }
-    
-is_hula_hoop(hh1);
-    
-    
-    
-    
-    
+//is_hula_hoop(hh3);
+
+const a = pair(1,1);
+const b = pair(1,1);
+const c = pair(1,1);
+
+set_head(a,b);
+set_head(b,c);
+set_tail(a,b);
+set_tail(b,c);
+set_head(c,b);
+set_tail(c,b);
+draw_data(a);
+
+is_hula_hoop(a);rdrfsfxf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
