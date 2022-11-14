@@ -133,7 +133,7 @@ function count_islands(arr){
 const emap = [[1,1,0,0,1,1],[1,1,1,1,1,1],[0,0,0,0,0,0],[0,0,1,1,0,0],[0,1,1,1,1,0],
 [0,0,0,0,0,0],[1,0,1,0,1,0]];
 
-const ggg = [[0,0,1],[0,1,0],[1,1,1],[0,0,0],[1,0,1]];
+const ggg = [[1,0,1],[0,1,0],[1,0,1],[0,1,0],[1,0,1]];
 
  
  
@@ -144,6 +144,8 @@ const c = position_only(linelets([0, 0, 0, 0, 0, 3, 3, 0]));
     
     
     
+//greedy approach search for a islets check all 4 surrounding if islet turn to 0
+
 function spread(A,i,j) {
     const lenI = array_length(A);
     const lenJ = array_length(A[0]);
