@@ -73,12 +73,42 @@ set_head(c,b);
 set_tail(c,b);
 draw_data(a);
 
-is_hula_hoop(a);rdrfsfxf
+function g(xs) {
+    let s = null;
+    function h(x) {
+        if(is_null(x)||!is_pair(x)||!is_pair(head(x))||!is_pair(tail(x))) {
+            return false;
+        }
+       
+       else if(!is_null(member(x,s))) {
+           return true;
+       }
+       
+       
+       else {
+           
+               s = pair(x,s);
+               return h(head(x)) ? h(tail(x)) : false;
+               
+           
+           
+           
+           
+           
+           
+       }
+        
+        
+        
+    }
+     return h(xs);   
+        
+        
+        
+    }
 
 
-
-
-
+g(hh1);
 
 
 
