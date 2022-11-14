@@ -140,18 +140,65 @@ const ggg = [[0,0,1],[0,1,0],[1,1,1],[0,0,0],[1,0,1]];
 const b = linelets([1, 2, 0, 0, 1, 0, 0, 1]);
 const c = position_only(linelets([0, 0, 0, 0, 0, 3, 3, 0]));
 
-count_islands(ggg);
+//count_islands(ggg);
     
     
     
-
+function spread(A,i,j) {
+    const lenI = array_length(A);
+    const lenJ = array_length(A[0]);
+    
+    
+    if(i<0||j<0||i>=lenI||j>=lenJ) {
+        return undefined;
+    }
+    
+    
+    
+    
+    if(A[i][j]!==0) {
+        A[i][j]=0;
+        spread(A,i-1,j);
+        spread(A,i,j+1);
+        spread(A,i+1,j);
+        spread(A,i,j-1);
+    }
+}
         
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+function f(A) {
+    let count = 0;
+    const lenI = array_length(A);
+    const lenJ = array_length(A[0]);
+    for(let i=0;i<lenI;i=i+1){
+        for(let j=0;j<lenJ;j=j+1) {
+           if(A[i][j]!==0) {
+               count = count +1 ;
+               spread(A,i,j);
+           } 
+            
+            
+            
+            
+        }
+    }
+   return count; 
+}      
     
 
-
-
-
+f(ggg);
 
 
 
