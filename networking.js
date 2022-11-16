@@ -37,7 +37,11 @@ function is_connected(x,y) {
      let c = false;
      const visited = pair(1,1);
      function greedy(s) {
-         if(s===y) {
+         if(c===true) {
+             return undefined;
+         }
+         
+        else if(s===y) {
              c=true;
          }
         else if (head(s)===visited) {
@@ -48,6 +52,12 @@ function is_connected(x,y) {
             const len = length(g);
             set_head(s,visited);
             for(let i=0;i<len;i=i+1) {
+               if(c===true) {
+                   break;
+               }
+               
+               else {
+               
                 greedy(head(g));
                 g=tail(g);
             }
@@ -56,6 +66,7 @@ function is_connected(x,y) {
             
         } 
          
+     }
      }
     greedy(x);
     
@@ -66,7 +77,7 @@ function is_connected(x,y) {
 
 
 
-//is_connected(B_node, C_node); // returns true
+is_connected(B_node, C_node); // returns true
 //is_connected(A_node, D_node); // returns true
 //is_connected(A_node, E_node); // returns false
 //is_connected(E_node, E_node); // returns true
