@@ -49,14 +49,24 @@ function make_sum_area_table(M) {
 }
 
 
-const s = display(make_sum_area_table(M));
+const S = display(make_sum_area_table(M));
 
 
-function fast_submatrix_sum(S, min_row, min_col, max_row, max_col);
-     const a = (S[max_row][max_col]===undefined) 0 ? s
+function fast_submatrix_sum(S, min_row, min_col, max_row, max_col) {
+     const a = (S[max_row][max_col]===undefined) ? 0 : S[max_row][max_col];
+     const b = ((min_row-1)<0||S[min_row-1][max_col]===undefined) ? 0 : S[min_row-1][max_col];
+     const c = ((min_col-1)<0||S[max_row][min_col-1]===undefined) ? 0 : S[max_row][min_col-1];
+     const d = ((min_row-1<0)||(min_col-1<0)||S[min_row-1][min_col-1]===undefined) ? 0 : S[min_row-1][min_col-1];
+     return a-(b+c-d);
+     }
+     
      
 
 
+fast_submatrix_sum(S, 1, 2, 1, 2); // returns 4
+fast_submatrix_sum(S, 0, 0, 2, 3); // returns 42
+//fast_submatrix_sum(S, 1, 1, 2, 2); // returns 16
+//fast_submatrix_sum(S, 0, 1, 2, 2); // returns 21
 
 
 
