@@ -23,7 +23,7 @@ function arraytree_height(A) {
 }
     
     
-arraytree_height([ 9, [ 3, 8, [6, [[3]]] ], [5, [[7]]] ]); 
+arraytree_height([1,[[[[[[1]]]]]],[2]]); 
     
     
     
