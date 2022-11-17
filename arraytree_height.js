@@ -4,13 +4,15 @@ function arraytree_height(A) {
     }
   else {
       const len = array_length(A);
-      let s = null;
+      let s = 0;
       for(let i=0;i<len;i=i+1) {
           const c = arraytree_height(A[i])+1;
-          s=pair(c,s);
+          if(s<c) {
+              s=c;
+          }
       }
       
-      return accumulate((x,y)=>x>y?x:y,0,s);
+      return s;
       
       
       
