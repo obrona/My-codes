@@ -77,7 +77,7 @@ function prime_factorisation(x) {
     return result;
     }
     
-   prime_factorisation(78345);
+   prime_factorisation(171);
     
     
     
