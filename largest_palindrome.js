@@ -49,7 +49,7 @@ function largest_palindrome(A) {
     
 }
 
-largest_palindrome([1,2,2,1,2,2,1]);
+largest_palindrome([1,2,3,4,5,5,1,5,5,2]);
 
 
 
