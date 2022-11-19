@@ -15,12 +15,16 @@ function write(n, k, value) {
 
 function knapsack(xs,w) {
     function f(ys,d,i) {
-        if(read(i,d)!==undefined) {
-            return read(i,d);
-        }
-        else if (d<0) {
+        if (d<0) {
             return -Infinity;
         }
+        
+        
+        
+        else if(read(i,d)!==undefined) {
+            return read(i,d);
+        }
+        
         else if (d===0) {
             write(i,d,0);
             return 0;
@@ -57,7 +61,7 @@ function knapsack(xs,w) {
 }
 
 
-knapsack(list(pair(10,10),pair(20,5),pair(30,1)),16);
+knapsack(list([60,10],[100,20],[120,30],[100,15],[200,35]),100);
 
 
 
