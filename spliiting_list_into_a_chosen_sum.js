@@ -40,7 +40,7 @@ function split(xs,y) {
     
 }
 
-display_list(split(list(1,5,11,5),10));
+display_list(split(list(1,-1,33,-45),-99));
 
 
 
