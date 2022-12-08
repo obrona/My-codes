@@ -1,6 +1,6 @@
 function partition(xs,n) {
     if(n===1) {
-        return list(xs); 
+        return list(list(xs)); 
     }
     else if (n===length(xs)) {
         return list(map(x=>list(x),xs));
@@ -9,11 +9,17 @@ function partition(xs,n) {
     
     else {
         //const g = head(xs);
-        const case1 = pair(list(head(xs)),partition(tail(xs),n-1));
-        const case2 = accumulate(append,null,
+        const case1 = map(x=>pair(list(head(xs)),x),partition(tail(xs),n-1));
+       
+       
+       
+       
+       
+       
+       const case2 = accumulate(append,null,
                            map(x=>insertor(x,head(xs)),partition(tail(xs),n)));
         //display_list(case2);
-        return append(list(case1),case2);
+        return append(case1,case2);
         
         
         
@@ -59,4 +65,4 @@ function insertor(xs,y) {
 }
 
 
-display_list(partition(list(1,2,3,4),2));
+display_list(partition(list(1,2,3,4),3));
